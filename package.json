@@ -1,0 +1,26 @@
+{
+  "name": "tokshow-2.0",
+  "version": "0.0.1",
+  "description": "TokShow with WebRTC",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aullman/tokshow-2.0.git"
+  },
+  "keywords": [
+    "tokshow",
+    "opentok"
+  ],
+  "author": "Adam & John",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/aullman/tokshow-2.0/issues"
+  },
+  "homepage": "https://github.com/aullman/tokshow-2.0",
+  "dependencies": {
+    "express": "3.x"
+  }
+}

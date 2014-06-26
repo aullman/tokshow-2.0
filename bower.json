@@ -1,0 +1,25 @@
+{
+  "name": "tokshow-2.0",
+  "version": "0.0.1",
+  "homepage": "https://github.com/aullman/tokshow-2.0",
+  "authors": [
+    "Adam Ullman <adam@tokbox.com>"
+  ],
+  "description": "TokShow with WebRTC",
+  "main": "app.js",
+  "keywords": [
+    "tokshow",
+    "opentok"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "opentok-angular": "~0.2.3"
+  }
+}
