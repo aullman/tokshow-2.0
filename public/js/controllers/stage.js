@@ -6,4 +6,14 @@ window.TokShowApp
     $scope.kick = function (stream) {
         OTSession.session.forceUnpublish(stream);
     };
+
+    updateState(); 
+    
+    function updateState() {
+      // get the time
+      $.get("/state", function(tokshowState) {
+        $scope.state = tokshowState.state;
+        $scope.$apply();
+      });
+    }
 }]);

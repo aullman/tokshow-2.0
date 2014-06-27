@@ -4,7 +4,8 @@ window.TokShowApp
 
     OTSession.init(apiKey, sessionId, token);
     window.StageSession = OTSession;
-    
+    window.StateScope = $scope;
+
     $scope.streams = OTSession.streams;
 
     
@@ -28,16 +29,13 @@ window.TokShowApp
       $scope.$apply();
     }
 
-    OTSession.session.on('signal:stateChange', function () {
-      updateState();
-    });
-
-    updateState(); 
-    
-    function updateState() {
+    $scope.getState = function() {
       // get the time
       $.get("/state", function(tokshowState) {
         $scope.state = tokshowState.state;
+        $scope.$apply();
       });
     }
+
+    $scope.getState();
 }]);

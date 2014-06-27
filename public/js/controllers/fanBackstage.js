@@ -30,6 +30,11 @@ window.BackStage
         $scope.$apply();
     });
 
+
+    OTSession.session.on('signal:stateChanged', function () {
+      StateScope.getState();
+    });
+
     $scope.getInline = function () {
         $scope.inline = true;
     };

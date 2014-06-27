@@ -103,6 +103,27 @@
             font-size: 18px;
             color: #fff;
         }
+        .thanks {
+            width: 100%;
+            position: absolute;
+            top: 100px;
+            color: #fff;
+            font-size: 50px;
+            text-align: center;
+            text-shadow: 0 7px 5px #000000;
+            z-index: 1;
+            line-height: 35px;
+        }
+
+        .thanks br {
+            margin: 0;
+            padding: 0;
+        }
+
+        .subthanks {
+            font-size: 30px;
+            color: #888;
+        }
         </style>
     </head>
     <body>
@@ -110,6 +131,8 @@
             <div class="stage" ng-controller="StageController" ng-app="tokshow">
                 <span class="connCount" ng-bind="count"></span>
                 <div class="countdown" ng-show="state == 'pending'">talking to you live on video <span class='timer'>shortly</span></div>
+                <div class="thanks" ng-show="state == 'finished'">thanks for watching<br><span class="subthanks">stay tuned for our next event</span></div>
+
                 <ot-layout props="{animate:true}">
                     <ot-subscriber ng-repeat="stream in streams" 
                         stream="stream" 

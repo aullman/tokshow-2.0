@@ -9,4 +9,42 @@ window.BackStage
             to: fanStream.connection
         });
     };
+
+    getState(); 
+    
+    $scope.startShow = function() {
+      updateState("started");
+    }
+
+    $scope.stopShow = function() {
+      updateState("finished");
+    }
+
+    $scope.resetShow = function() {
+      updateState("pending");
+    }
+
+    function updateState(state) {
+      $.post("/state", {
+        state: state
+      }, function(tokshowState) {
+        $scope.state = tokshowState.state;
+        $scope.$apply();
+      }, "json")
+      relayState();
+    }
+
+    function relayState() {
+        OTSession.session.signal({
+            type: 'stateChanged'
+        });
+    }
+
+    function getState() {
+      // get the time
+      $.get("/state", function(tokshowState) {
+        $scope.state = tokshowState.state;
+        $scope.$apply();
+      });
+    }
 }]);
