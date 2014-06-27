@@ -34,6 +34,7 @@ window.TokShowApp
       $.get("/state", function(tokshowState) {
         $scope.state = tokshowState.state;
         $scope.$apply();
+        BackstageScope.updateState(tokshowState.state);
       });
     }
 

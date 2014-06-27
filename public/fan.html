@@ -133,7 +133,7 @@
                 <div class="countdown" ng-show="state == 'pending'">talking to you live on video <span class='timer'>shortly</span></div>
                 <div class="thanks" ng-show="state == 'finished'">thanks for watching<br><span class="subthanks">stay tuned for our next event</span></div>
 
-                <ot-layout props="{animate:true}">
+                <ot-layout ng-show="state =='started'" props="{animate:true}">
                     <ot-subscriber ng-repeat="stream in streams" 
                         stream="stream" 
                         session="session" 
@@ -142,7 +142,7 @@
                 </ot-layout>
             </div>
             <div class="backstage" ng-app="backstage" ng-controller="BackstageController">
-                <input type="button" name="inlineBtn" value="" ng-hide="inline" id="inlineBtn" ng-click="getInline()">
+                <input type="button" name="inlineBtn" ng-hide="inline || state == 'finished'" id="inlineBtn" ng-click="getInline()">
                 <div class="backstageText" ng-show="inline && !onstage">If picked to go live, you will take the stage as the guest.</div>
                 <div class="publisher">
                     <ot-publisher id="publisher"

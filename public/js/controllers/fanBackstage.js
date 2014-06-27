@@ -2,6 +2,7 @@ window.BackStage
 .controller('BackstageController', ['$scope', 'OTSession', 'apiKey', 'sessionId', 'token', function($scope, OTSession, apiKey, sessionId, token) {
     OTSession.init(apiKey, sessionId, token);
     window.BackstageSession = OTSession;
+    window.BackstageScope = $scope;
     $scope.streams = OTSession.streams;
     
     OTSession.session.on('signal:goOnstage', function () {
@@ -34,6 +35,11 @@ window.BackStage
     OTSession.session.on('signal:stateChanged', function () {
       StateScope.getState();
     });
+
+    $scope.updateState = function(newState) {
+        $scope.state = newState;
+        $scope.$apply();
+    }
 
     $scope.getInline = function () {
         $scope.inline = true;

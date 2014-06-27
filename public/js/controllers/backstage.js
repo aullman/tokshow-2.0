@@ -35,6 +35,9 @@ window.BackStage
     }
 
     function relayState() {
+        stageSession.signal({
+          type: 'stateChanged'
+        });
         OTSession.session.signal({
             type: 'stateChanged'
         });
