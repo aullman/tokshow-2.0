@@ -12,6 +12,10 @@ window.BackStage
             publisher.on('streamDestroyed', function (event) {
                 if (event.reason !== 'forceUnpublished') {
                     event.preventDefault();
+                } else {
+                    $scope.onstage = false;
+                    $scope.inline = false;
+                    $scope.$apply();
                 }
             });
             
@@ -22,6 +26,8 @@ window.BackStage
             var pub = document.querySelector('ot-publisher');
             layoutContainer.appendChild(pub);
         }
+        $scope.onstage = true;
+        $scope.$apply();
     });
 
     $scope.getInline = function () {

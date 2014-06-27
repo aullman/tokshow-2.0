@@ -2,11 +2,32 @@
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title>Admin Page</title>
+        <title>Fan Page</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <style type="text/css" media="screen">
+        body {
+            font-family: 'Universal Bold Condensed', Universal, Arial, Helvetica, Sans-serif;
+        }
+        body, div {
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrapper {
+            background-color: #000;
+            position: relative;
+            width: 981px;
+            height: 435px;
+            background-image: url('/images/tokshowbg.png');
+            background-repeat: no-repeat;
+            padding-top: 45px;
+            box-sizing: border-box;
+        }
+
         .stage {
-            width: 500px;
-            height: 200px;
+            position: relative;
+            width: 100%;
+            height: 256px;
+            margin-bottom: 45px;
         }
         ot-publisher,ot-subscriber,ot-layout {
              display: block;
@@ -18,29 +39,95 @@
              height: 100%;
          }
          .publisher {
-             width: 100px;
-             height: 100px;
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            width: 112px;
+            height: 84px;
          }
+         .connCount {
+            color: #fff;
+            position: absolute;
+            top: 335px;
+            left: 25px;
+            width: 45px;
+            text-align: center;
+            z-index: 1;
+         }
+         .countdown {
+            position: absolute;
+            top: 120px;
+            width: 100%;
+            text-align: center;
+            font-size: 50px;
+            color: #fff;
+            text-shadow: 0 7px 5px #000000;
+            z-index: 1;
+         }
+         .timer {
+            color: red;
+         }
+         .backstage {
+            position: relative;
+            height: 90px;
+         }
+
+         #inlineBtn {
+            background: url('http://static.opentok.com/opentok/embeds/tokshow/img/btn_getinline_sprite.png') no-repeat top left;
+            border: none;
+            cursor: pointer;
+            height: 67px;
+            width: 198px;
+            position: absolute;
+            top: 14px;
+            right: 370px;
+            width: 200px;
+         }
+
+        #inlineBtn:hover {
+            background:url('http://static.opentok.com/opentok/embeds/tokshow/img/btn_getinline_sprite.png') no-repeat 0px -69px;
+        }
+
+        #inlineBtn.selected{
+            background:url('http://static.opentok.com/opentok/embeds/tokshow/img/btn_leaveline_sprite.png') no-repeat;      
+        }
+
+        #inlineBtn.selected:hover{
+            background:url('http://static.opentok.com/opentok/embeds/tokshow/img/btn_leaveline_sprite.png') no-repeat 0px -67px;        
+        }
+        .backstageText {
+            position: absolute;
+            top: 20px;
+            right: 120px;
+            width: 220px;
+            font-size: 18px;
+            color: #fff;
+        }
         </style>
     </head>
     <body>
-        <div class="stage" ng-controller="StageController" ng-app="tokshow">
-            <ot-layout props="{animate:true}">
-                <ot-subscriber ng-repeat="stream in streams" 
-                    stream="stream" 
-                    session="session" 
-                    props="{style: {nameDisplayMode: 'off'}}">
-                </ot-subscriber>
-            </ot-layout>
-        </div>
-        <div class="backstage" ng-app="backstage" ng-controller="BackstageController">
-            <input type="button" name="inlineBtn" value="Get In Line" id="inlineBtn" ng-click="getInline()">
-            <div class="publisher">
-                <ot-publisher id="publisher"
-                    ng-if="inline"
-                    apiKey="1127" 
-                    props="{style: {nameDisplayMode: 'off'}, resolution: '1280x720', frameRate: 30, width: '100%', height: '100%'}">
-                </ot-publisher>
+        <div class="wrapper">
+            <div class="stage" ng-controller="StageController" ng-app="tokshow">
+                <span class="connCount" ng-bind="count"></span>
+                <div class="countdown" ng-show="state == 'pending'">talking to you live on video <span class='timer'>shortly</span></div>
+                <ot-layout props="{animate:true}">
+                    <ot-subscriber ng-repeat="stream in streams" 
+                        stream="stream" 
+                        session="session" 
+                        props="{style: {nameDisplayMode: 'off'}}">
+                    </ot-subscriber>
+                </ot-layout>
+            </div>
+            <div class="backstage" ng-app="backstage" ng-controller="BackstageController">
+                <input type="button" name="inlineBtn" value="" ng-hide="inline" id="inlineBtn" ng-click="getInline()">
+                <div class="backstageText" ng-show="inline && !onstage">If picked to go live, you will take the stage as the guest.</div>
+                <div class="publisher">
+                    <ot-publisher id="publisher"
+                        ng-if="inline"
+                        apiKey="1127" 
+                        props="{style: {nameDisplayMode: 'off'}, resolution: '1280x720', frameRate: 30, width: '100%', height: '100%'}">
+                    </ot-publisher>
+                </div>
             </div>
         </div>
         <script src="//static.opentok.com/webrtc/v2.2/js/TB.js" type="text/javascript" charset="utf-8"></script>
