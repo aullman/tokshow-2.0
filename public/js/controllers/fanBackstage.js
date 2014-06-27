@@ -29,15 +29,27 @@ window.BackStage
         }
         $scope.onstage = true;
         $scope.$apply();
+        window.StageScope.$apply();
     });
 
 
     OTSession.session.on('signal:stateChanged', function () {
-      StateScope.getState();
+      StageScope.getState();
     });
 
     $scope.updateState = function(newState) {
         $scope.state = newState;
+
+        if (newState == 'finished' && $scope.inline) {
+            var publisher = window.BackstageSession.publishers[0];
+            if (publisher) {
+                publisher.destroy();
+                publisher.off()
+                $scope.inline = false;
+                $scope.onstage = false;
+            }
+        }
+
         $scope.$apply();
     }
 

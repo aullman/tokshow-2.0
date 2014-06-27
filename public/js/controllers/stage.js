@@ -4,7 +4,7 @@ window.TokShowApp
     window.stageSession = OTSession.session;
     $scope.streams = OTSession.streams;
     $scope.count = 0;
-    
+
     $scope.kick = function (stream) {
         OTSession.session.forceUnpublish(stream);
     };
@@ -28,6 +28,10 @@ window.TokShowApp
     function updateCount() {
       $scope.$apply();
     }
+
+    OTSession.session.on('signal:stateChanged', function () {
+      updateState();
+    });
 
     updateState(); 
     

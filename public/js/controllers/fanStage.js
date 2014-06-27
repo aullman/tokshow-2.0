@@ -4,7 +4,7 @@ window.TokShowApp
 
     OTSession.init(apiKey, sessionId, token);
     window.StageSession = OTSession;
-    window.StateScope = $scope;
+    window.StageScope = $scope;
 
     $scope.streams = OTSession.streams;
 

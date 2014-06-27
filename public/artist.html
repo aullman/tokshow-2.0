@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title>Admin Page</title>
+        <title>Artist Page</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <style type="text/css" media="screen">
         body {
             font-family: 'Universal Bold Condensed', Universal, Arial, Helvetica, Sans-serif;
@@ -28,10 +29,6 @@
             height: 256px;
             margin-bottom: 45px;
         }
-        .stage {
-            width: 500px;
-            height: 200px;
-        }
         ot-publisher,ot-subscriber,ot-layout {
              display: block;
              overflow: hidden;
@@ -55,6 +52,8 @@
     <body>
         <div class="wrapper">
             <div class="stage" ng-controller="StageController" ng-app="tokshow">
+                <div class="countdown" ng-show="state == 'pending'">Waiting on admin to start the show</div>
+                <div class="countdown" ng-show="state == 'finished'">The show has ended</div>
                 <span class="connCount" ng-bind="count"></span>
                 <ot-layout props="{animate:true}">
                     <ot-subscriber ng-repeat="stream in streams" 
@@ -63,7 +62,8 @@
                         props="{style: {nameDisplayMode: 'off'}}">
                     </ot-subscriber>
                     <ot-publisher id="publisher" 
-                        apiKey="1127" 
+                        apiKey="1127"
+                        ng-if="state == 'started'"
                         props="{style: {nameDisplayMode: 'off'}, resolution: '1280x720', frameRate: 30}">
                     </ot-publisher>
                 </ot-layout>
