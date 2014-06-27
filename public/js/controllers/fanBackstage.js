@@ -14,6 +14,9 @@ window.BackStage
                 if (event.reason !== 'forceUnpublished') {
                     event.preventDefault();
                 } else {
+                    window.setTimeout(function() {
+                        window.StageScope.$apply();
+                    }, 500);
                     $scope.onstage = false;
                     $scope.inline = false;
                     $scope.$apply();
